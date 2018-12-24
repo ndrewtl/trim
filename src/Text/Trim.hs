@@ -1,4 +1,4 @@
-module Text.Trim (trimSpaces) where
+module Text.Trim (trimSpaces, trimLines) where
 
 import Data.Char
 

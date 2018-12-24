@@ -8,7 +8,5 @@ quote str = "\"" ++ str ++ "\""
 
 main :: IO ()
 main = do
-  line <- getLine
-  putStrLn $ (quote . trimSpaces) line
-  done <- hIsEOF stdin
-  if done then pure () else main
+  lines <- fmap lines getContents
+  putStr $ unlines $ trimLines $ map trimSpaces lines
