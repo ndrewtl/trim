@@ -1,6 +1,14 @@
 module Main where
 
-import Lib
+import Text.Trim
+import System.IO
+
+quote :: String -> String
+quote str = "\"" ++ str ++ "\""
 
 main :: IO ()
-main = someFunc
+main = do
+  line <- getLine
+  putStrLn $ (quote . trimSpaces) line
+  done <- hIsEOF stdin
+  if done then pure () else main
