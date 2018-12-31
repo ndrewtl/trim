@@ -13,7 +13,7 @@ options = Options
   <$> switch
     (  long  "newlines"
     <> short 'N'
-    <> help  "If enabled, also trim trailing newlines" )
+    <> help  "If enabled, trim trailing newlines" )
   <*> strOption
     ( long  "output"
     <> short 'o'
@@ -27,7 +27,12 @@ main = trim =<< execParser opts
       <> progDesc "Trim whitespace from files"
       <> header   "trim - remove trailing whitespace" )
 
+trimOperation :: [String] -> Options -> [String]
+trimOperation inputLines opts =
+  let trimmed = map trimSpaces inputLines
+  in if newlines opts then trimLines trimmed else trimmed
+
 trim :: Options -> IO ()
 trim opts = do
   inputLines <- fmap lines getContents
-  putStr $ unlines $ trimLines $ map trimSpaces inputLines
+  putStr $ unlines $ trimOperation inputLines opts
