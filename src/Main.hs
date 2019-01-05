@@ -20,19 +20,31 @@ options = Options
     <> value ""
     <> help  "File to direct output" )
 
-main = trim =<< execParser opts
+main = run =<< execParser opts
   where
     opts = info (options <**> helper)
       (  fullDesc
       <> progDesc "Trim whitespace from files"
       <> header   "trim - remove trailing whitespace" )
 
-trimOperation :: [String] -> Options -> [String]
-trimOperation inputLines opts =
+-- This method trims the given list of strings according to the options given
+trim :: [String] -> Options -> [String]
+trim inputLines opts =
   let trimmed = map trimSpaces inputLines
   in if newlines opts then trimLines trimmed else trimmed
 
-trim :: Options -> IO ()
-trim opts = do
+-- This method writes the given string according to options
+write :: String -> Options -> IO ()
+write str opts =
+  let outdest = output opts in
+    if null outdest
+      then putStr str
+      else error $ "Should write to file: " ++ outdest ++ ", behavior not yet implemented"
+
+-- This method is analogous to the 'main' method of most programs.
+-- Given options as input, output an IO action
+run :: Options -> IO ()
+run opts = do
   inputLines <- fmap lines getContents
-  putStr $ unlines $ trimOperation inputLines opts
+  let output = unlines $ trim inputLines opts
+    in write output opts
