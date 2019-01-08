@@ -80,8 +80,9 @@ executable trim
   -- other-extensions:
 
   -- Other library packages from which modules are imported.
-  build-depends:       base ^>=4.12.0.0
-                     , optparse-applicative
+  build-depends:       base ^>=4.12
+                     , directory ^>=1.3
+                     , optparse-applicative ^>= 0.14
 
   -- Directories containing source files.
   hs-source-dirs:      src

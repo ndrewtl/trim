@@ -1,8 +1,9 @@
 module Main where
 
+import System.IO
+import System.Directory
 import Options.Applicative
 import Text.Trim
-import System.IO
 
 data Options = Options
   { newlines :: Bool
@@ -37,9 +38,13 @@ trim inputLines opts =
 write :: String -> Options -> IO ()
 write str opts =
   let outdest = output opts in
-    if null outdest
-      then putStr str
-      else error $ "Should write to file: " ++ outdest ++ ", behavior not yet implemented"
+    if null outdest   -- If no file is specified ...
+      then putStr str -- just print to stdout
+      else do         -- Else, write to a temp file, then move it to the destination
+        (tname, thandle) <- openTempFile "." "trim"
+        hPutStr thandle str
+        hClose thandle
+        renameFile tname outdest
 
 -- This method is analogous to the 'main' method of most programs.
 -- Given options as input, output an IO action
