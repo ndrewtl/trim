@@ -24,3 +24,19 @@ main = hspec $ do
       trimSpaces "multiple\nlines\n"               `shouldBe` "multiple\nlines"
       trimSpaces "tabs\t"                          `shouldBe` "tabs"
       trimSpaces "bunch of whitespace\t\n\t\t "    `shouldBe` "bunch of whitespace"
+
+  describe "Text.Trim.trimLines" $ do
+
+    it "returns its input when the input has no trailing lines" $
+      let inputs = [ [ "hello", "world", "text" ]
+                   , [ "lines ", "containing", "trailing\n", "whitespace\t" ]
+                   , [ "final", "line", "mostly", "whitespace", "\t s  \t\t\t" ]
+                   , []
+                   , [ "we're done" ] ]
+        in map trimLines inputs `shouldBe` inputs
+
+    it "trims trailing lines of whitespace" $ do
+      trimLines [ "hello", "world", "  \t" ]            `shouldBe` [ "hello", "world" ]
+      trimLines [ "trim", "blank", "line", ""]          `shouldBe` [ "trim", "blank", "line" ]
+      trimLines [ "trim", "blank", "lines", "", "", ""] `shouldBe` [ "trim", "blank", "lines" ]
+      trimLines [ "", "\t", "\t \t"]                    `shouldBe` []
