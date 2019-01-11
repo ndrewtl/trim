@@ -7,10 +7,11 @@ import Text.Trim
 
 data Options = Options
   { newlines :: Bool
-  , output   :: FilePath }
+  , output   :: FilePath
+  , input    :: FilePath }
 
 options :: Parser Options
-options = Options
+options =  Options
   <$> switch
     (  long  "newlines"
     <> short 'N'
@@ -20,7 +21,11 @@ options = Options
     <> short 'o'
     <> value ""
     <> help  "File to direct output" )
+  <*> argument str
+    (  metavar "FILE"
+    <> value "-" )
 
+main :: IO ()
 main = run =<< execParser opts
   where
     opts = info (options <**> helper)
@@ -34,9 +39,17 @@ trim inputLines opts =
   let trimmed = map trimSpaces inputLines
   in if newlines opts then trimLines trimmed else trimmed
 
+-- This method
+readInput :: Options -> IO String
+readInput opts =
+  let filename = input opts
+  in if filename == "-"
+    then getContents
+    else error "Reading input file not yet implemented"
+
 -- This method writes the given string according to options
-write :: String -> Options -> IO ()
-write str opts =
+writeOutput :: String -> Options -> IO ()
+writeOutput str opts =
   let outdest = output opts in
     if null outdest   -- If no file is specified ...
       then putStr str -- just print to stdout
@@ -50,6 +63,6 @@ write str opts =
 -- Given options as input, output an IO action
 run :: Options -> IO ()
 run opts = do
-  inputLines <- fmap lines getContents
+  inputLines <- fmap lines (readInput opts)
   let output = unlines $ trim inputLines opts
-    in write output opts
+    in writeOutput output opts
