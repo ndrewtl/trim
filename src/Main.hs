@@ -45,7 +45,7 @@ readInput opts =
   let filename = input opts
   in if filename == "-"
     then getContents
-    else error "Reading input file not yet implemented"
+    else readFile filename
 
 -- This method writes the given string according to options
 writeOutput :: String -> Options -> IO ()
