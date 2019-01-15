@@ -27,7 +27,7 @@ homepage:            https://github.com/ndrewtl/trim
 -- bug-reports:
 
 -- The license under which the package is released.
-license:             MIT
+license:             BSD-3-Clause
 
 -- The file containing the license text.
 license-file:        LICENSE
