@@ -14,7 +14,8 @@ main = hspec $ do
                    , "One small step for man..."
                    , "The Glorious Glasgow Haskell Compilation System, version 8.6.3"
                    , "<!DOCTYPE html>"
-                   , "One\nstring\nacross\nmultiple\nlines" ]
+                   , "One\nstring\nacross\nmultiple\nlines"
+                   , "lots     of      spaces" ]
         in map trimSpaces inputs `shouldBe` inputs
 
     it "removes trailing spaces from a string that has them" $ do
