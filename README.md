@@ -4,5 +4,18 @@
 It is designed to be simple and transparent. It takes input from stdin and
 output from stdout, for easy piping.
 
+## Usage
+
+`trim [-N|--newlines] [-o|--output ARG] [FILE]`
+
+`trim` with no flags takes input from stdin and prints to stdout. It trims
+trailing whitespace from each line, but does not trim additional newlines.
+
+  - `[FILE]` The file to read from. If `FILE` is a single hyphen `-` or unspecified, read from standard input.
+
+  - `--output`, `-o` `[FILENAME]` write to the given filename instead of stdout
+
+  - `--newlines', '-N' Trim trailing newlines as well
+
 ## Building
 Build with `cabal v2-build`
