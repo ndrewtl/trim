@@ -1,14 +1,18 @@
 language: generic
 before_install:
   - echo 'Installing ghcup' &&
-    curl https://raw.githubusercontent.com/haskell/ghcup/master/bootstrap-haskell -sSf | sh &&
+    mkdir -p ~/.ghcup/bin &&
+      curl https://raw.githubusercontent.com/haskell/ghcup/master/ghcup > ~/.ghcup/bin/ghcup &&
+      chmod +x ~/.ghcup/bin/ghcup &&
     echo 'Adding ghcup to path' &&
     export PATH=$PATH:$HOME/.ghcup/bin &&
     echo 'Installing ghc' &&
     ghcup install 8.6.3 &&
     echo 'Setting default ghc' &&
-    ghcup set 8.6.3
+    ghc --version &&
+    ghcup set 8.6.3 &&
     echo 'Installing cabal' &&
-    ghcup install-cabal && cabal v2-install && cabal-install && cabal v2-update
+    ghcup install-cabal && cabal v2-install && cabal-install && cabal v2-update &&
+    cabal --version
 script:
   - ./test.sh
