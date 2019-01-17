@@ -23,6 +23,9 @@ synopsis:            A command-line tool for trimming whitespace
 -- URL for the project homepage or repository.
 homepage:            https://github.com/ndrewtl/trim
 
+-- for haskell-ci
+tested-with: GHC==8.6.3, GHC==8.4.4
+
 -- A URL where users can report bugs.
 -- bug-reports:
 
