@@ -11,7 +11,7 @@ before_install:
     echo 'Setting default ghc' &&
     ghcup set 8.6.3 &&
     echo 'Installing cabal' &&
-    ghcup install-cabal && cabal v2-update && cabal v2-install cabal-install &&
+    ghcup install-cabal && cabal v2-update &&
     ghc --version &&
     cabal --version
 script:
