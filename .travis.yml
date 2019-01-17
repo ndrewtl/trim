@@ -12,7 +12,7 @@ before_install:
     ghcup set 8.6.3 &&
     ghc --version &&
     echo 'Installing cabal' &&
-    ghcup install-cabal && cabal v2-install && cabal-install && cabal v2-update &&
+    ghcup install-cabal && cabal v2-install cabal-install && cabal v2-update &&
     cabal --version
 script:
   - ./test.sh
