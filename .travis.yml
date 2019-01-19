@@ -16,3 +16,7 @@ before_install:
     cabal --version
 script:
   - ./test.sh
+
+addons:
+  apt:
+    - lib64ncurses6
