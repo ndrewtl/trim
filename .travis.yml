@@ -20,4 +20,4 @@ script:
 addons:
   apt:
     packages:
-      - ncurses
+      - libtinfo-dev
