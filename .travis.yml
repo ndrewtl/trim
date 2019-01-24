@@ -20,4 +20,4 @@ script:
 addons:
   apt:
     packages:
-      - libnuma1
+      - libnuma-dev
