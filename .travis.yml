@@ -1,4 +1,6 @@
 language: generic
+dist: xenial
+
 before_install:
   - echo 'Installing ghcup' &&
     mkdir -p ~/.ghcup/bin &&
