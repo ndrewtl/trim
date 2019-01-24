@@ -20,4 +20,4 @@ script:
 addons:
   apt:
     packages:
-      - libtinfo-dev
+      - libnuma1
