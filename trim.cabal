@@ -18,13 +18,12 @@ version:             0.1.0.0
 synopsis:            A command-line tool for trimming whitespace
 
 -- A longer description of the package.
--- description:
+description:        trim is a simple command-line tool for removing unwanted
+                    whitespace from files
+
 
 -- URL for the project homepage or repository.
 homepage:            https://github.com/ndrewtl/trim
-
--- for haskell-ci
-tested-with: GHC==8.6.3, GHC==8.4.4
 
 -- A URL where users can report bugs.
 -- bug-reports:
@@ -51,6 +50,9 @@ category:            Text
 -- README.
 extra-source-files:  CHANGELOG.md, README.md
 
+source-repository head
+    type:     git
+    location: https://github.com/ndrewtl/trim
 
 library
   -- Modules exported by the library.
