@@ -17,7 +17,7 @@ trailing whitespace from each line, but does not trim additional newlines.
 
   - `--output`, `-o` `[FILENAME]` write to the given filename instead of stdout
 
-  - `--newlines', '-N' Trim trailing newlines as well
+  - `--newlines`, '-N' Trim trailing newlines as well
 
 ## Building
 Build with `cabal v2-build`
