@@ -19,5 +19,17 @@ trailing whitespace from each line, but does not trim additional newlines.
 
   - `--newlines`, `-N` Trim trailing newlines as well
 
+## Installation
+
+You can easily install using `cabal` as follows:
+
+```sh
+cabal v2-update && cabal v2-install trim
+```
+
 ## Building
 Build with `cabal v2-build`
+
+## Testing
+
+Test with `./test.sh`
