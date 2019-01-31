@@ -1,6 +1,7 @@
 # trim
 
 [![Build Status](https://travis-ci.com/ndrewtl/trim.svg?branch=master)](https://travis-ci.com/ndrewtl/trim)
+[![hackage release](https://img.shields.io/hackage/v/trim.svg?label=hackage)](http://hackage.haskell.org/package/trim)
 
 `trim` is a simple unix-philosophy tool to trim trailing whitespace from a file.
 It is designed to be simple and transparent. It takes input from stdin and
