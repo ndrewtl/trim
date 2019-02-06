@@ -7,7 +7,7 @@ import Text.Trim
 
 data Options = Options
   { newlines :: Bool
-  , output   :: FilePath
+  , output   :: Maybe FilePath
   , input    :: FilePath }
 
 options :: Parser Options
@@ -16,11 +16,10 @@ options =  Options
     (  long  "newlines"
     <> short 'N'
     <> help  "If enabled, trim trailing newlines" )
-  <*> strOption
-    ( long  "output"
-    <> short 'o'
-    <> value ""
-    <> help  "File to direct output" )
+  <*> optional (strOption
+      (  long  "output"
+      <> short 'o'
+      <> help  "File to direct output" ))
   <*> argument str
     (  metavar "FILE"
     <> value "-" )
@@ -50,14 +49,13 @@ readInput opts =
 -- This method writes the given string according to options
 writeOutput :: String -> Options -> IO ()
 writeOutput str opts =
-  let outdest = output opts in
-    if null outdest   -- If no file is specified ...
-      then putStr str -- just print to stdout
-      else do         -- Else, write to a temp file, then move it to the destination
-        (tname, thandle) <- openTempFile "." "trim"
-        hPutStr thandle str
-        hClose thandle
-        renameFile tname outdest
+  case output opts of
+    Nothing      -> putStr str -- If no file is specified, then just print to stdout
+    Just outdest -> do -- Else, write to a temp file, then move it to the destination
+      (tname, thandle) <- openTempFile "." "trim"
+      hPutStr thandle str
+      hClose thandle
+      renameFile tname outdest
 
 -- This method is analogous to the 'main' method of most programs.
 -- Given options as input, output an IO action
