@@ -3,7 +3,7 @@ module Main where
 import System.IO
 import System.Directory
 import Options.Applicative
-import Text.Trim
+import Trim
 
 data Options = Options
   { newlines :: Bool

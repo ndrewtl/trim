@@ -1,5 +1,5 @@
 -- | Module that defines functions for removing unwanted whitespace from strings
-module Text.Trim (trimSpaces, trimLines) where
+module Trim (trimSpaces, trimLines) where
 
 import Data.Char
 

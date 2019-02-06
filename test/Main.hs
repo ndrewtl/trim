@@ -1,12 +1,12 @@
 -- Tests for trim
 
 import Test.Hspec
-import Text.Trim
+import Trim
 
 main :: IO ()
 main = hspec $ do
 
-  describe "Text.Trim.trimSpaces" $ do
+  describe "Trim.trimSpaces" $ do
 
     it "returns its input when the input has no trailing space" $
       let inputs = [ "hello, world!"
@@ -26,7 +26,7 @@ main = hspec $ do
       trimSpaces "tabs\t"                          `shouldBe` "tabs"
       trimSpaces "bunch of whitespace\t\n\t\t "    `shouldBe` "bunch of whitespace"
 
-  describe "Text.Trim.trimLines" $ do
+  describe "Trim.trimLines" $ do
 
     it "returns its input when the input has no trailing lines" $
       let inputs = [ [ "hello", "world", "text" ]
