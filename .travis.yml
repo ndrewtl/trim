@@ -1,7 +1,13 @@
-language: generic
+language: minimal
 dist: xenial
 
-before_install:
+env: # specify the GHC versions to test with
+  - GHC_VERSION=8.0.2
+  - GHC_VERSION=8.2.2
+  - GHC_VERSION=8.4.4
+  - GHC_VERSION=8.6.3
+
+before_install: # Use ghcup to install the compiler and cabal
   - echo 'Installing ghcup' &&
     mkdir -p ~/.ghcup/bin &&
       curl https://raw.githubusercontent.com/haskell/ghcup/master/ghcup > ~/.ghcup/bin/ghcup &&
@@ -9,17 +15,18 @@ before_install:
     echo 'Adding ghcup to path' &&
     export PATH=$PATH:$HOME/.ghcup/bin &&
     echo 'Installing ghc' &&
-    ghcup install 8.6.3 &&
+    ghcup install $GHC_VERSION &&
     echo 'Setting default ghc' &&
-    ghcup set 8.6.3 &&
+    ghcup set $GHC_VERSION &&
     echo 'Installing cabal' &&
     ghcup install-cabal && cabal v2-update &&
     ghc --version &&
     cabal --version
+
 script:
   - ./test.sh
 
 addons:
   apt:
     packages:
-      - libnuma-dev
+      - libnuma-dev # Needed to compile `clock` dependency
