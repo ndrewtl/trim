@@ -3,21 +3,25 @@ module Trim.CLI.Parser (Options(..), options) where
 import Options.Applicative
 
 data Options = Options
-  { newlines :: Bool
+  { input    :: FilePath
   , output   :: Maybe FilePath
-  , input    :: FilePath }
+  , newlines :: Bool
+  , version  :: Bool }
 
 options :: Parser Options
 options =  Options
-  <$> switch
-    (  long  "newlines"
-    <> short 'N'
-    <> help  "If enabled, trim trailing newlines" )
+  <$> argument str
+    (  metavar "FILE"
+    <> value "-" )
   <*> optional (strOption
       (  long  "output"
       <> short 'o'
       <> help  "File to direct output" ))
-  <*> argument str
-    (  metavar "FILE"
-    <> value "-" )
-
+  <*> switch
+    (  long  "newlines"
+    <> short 'N'
+    <> help  "If enabled, trim trailing newlines" )
+  <*> switch
+    (  long "version"
+    <> short 'v'
+    <> help "Show version number" )
