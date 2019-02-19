@@ -32,4 +32,3 @@ getOpts =  execParser $ info (options <**> helper)
   (  fullDesc
      <> progDesc "Trim whitespace from files"
      <> header   "trim - remove trailing whitespace" )
-
