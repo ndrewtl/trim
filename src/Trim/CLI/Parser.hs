@@ -1,4 +1,4 @@
-module Trim.CLI.Parser (Options(..), options) where
+module Trim.CLI.Parser (Options(..), options, getOpts) where
 
 import Options.Applicative
 
@@ -25,3 +25,11 @@ options =  Options
     (  long "version"
     <> short 'v'
     <> help "Show version number" )
+
+
+getOpts :: IO Options
+getOpts =  execParser $ info (options <**> helper)
+  (  fullDesc
+     <> progDesc "Trim whitespace from files"
+     <> header   "trim - remove trailing whitespace" )
+
